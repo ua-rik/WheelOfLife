@@ -305,11 +305,11 @@
             var myChart = new Chart(ctx, {
                 type: 'polarArea',
                 data: {
-                    labels: ['Health', 'Relationships',
-                        'Fun and Recreation', 'Spirituality', 'Career',
-                        'Money', 'Physical Environment', 'Personal Growth'],
-                    datasets: [{
-                        label: 'Odd Question Numbers',
+                    labels: ['Career', 'Money',
+                        'Health', 'Relationships', 'Personal Growth',
+                        'Fun and Recreation', 'Physical Environment', 'Spirituality'],
+                        datasets: [{
+                        label: 'Now',
                         data: oddAnswers,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.5)',
@@ -325,7 +325,7 @@
                         ],
                         borderWidth: 1
                     }, {
-                        label: 'Even Question Numbers',
+                        label: 'Future',
                         data: evenAnswers,
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.5)',
@@ -360,23 +360,23 @@
                                 font: {
                                     size: 14
                                 }
-                            }
+                            },
+                            min: 0,
+                            max: 10,
+                            ticks: {
+                                   display: false // Вимкнення позначок осі
+                           }
                         }
                     },
-                    scale: {
-                        display: false // Вимкнення позначок осі
-                    }
-
-                },
-
+                 },
             });
 
 
             var tbody = document.getElementById('resultsTable').querySelector('tbody');
             tbody.innerHTML = ''; // Clear existing rows
-            var rowNames = ['Health', 'Relationships',
-                        'Fun and Recreation', 'Spirituality', 'Career',
-                        'Money', 'Physical Environment', 'Personal Growth']
+            var rowNames = ['Career', 'Money',
+                        'Health', 'Relationships', 'Personal Growth',
+                        'Fun and Recreation', 'Physical Environment', 'Spirituality']
             for (let i = 0; i < oddAnswers.length; i++) {
                 let row = tbody.insertRow();
                 let questionCell = row.insertCell(0);

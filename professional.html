@@ -307,7 +307,7 @@
                         'Productivity', 'Leadership', 'Work aligned w purpose',
                         'Work/Life balance', 'Challenge', '???'],
                     datasets: [{
-                        label: 'Odd Question Numbers',
+                        label: 'Now',
                         data: oddAnswers,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.5)',
@@ -323,7 +323,7 @@
                         ],
                         borderWidth: 1
                     }, {
-                        label: 'Even Question Numbers',
+                        label: 'Future',
                         data: evenAnswers,
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.5)',
@@ -358,15 +358,15 @@
                                 font: {
                                     size: 14
                                 }
-                            }
+                            },
+                            min: 0,
+                            max: 10,
+                            ticks: {
+                                   display: false // Вимкнення позначок осі
+                           }
                         }
                     },
-                    scale: {
-                        display: false // Вимкнення позначок осі
-                    }
-
-                },
-
+                 },
             });
 
 
