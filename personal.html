@@ -162,69 +162,69 @@
     <div id="surveyForm">
         <!-- Repeat this structure for each question -->
         <div class="question-box" id="question1">
-            <p>How do you feel about your Growth/Opportunity right now?</p>
+            <p>How do you feel about your Career right now?</p>
             <div id="buttons1"></div>
         </div>
         <div class="question-box" id="question2">
-            <p>How would you like to feel about your Growth/Opportunity in the future?</p>
+            <p>How would you like to feel about your Career in the future?</p>
             <!-- Growth/Opportunity -->
             <div id="buttons2"></div>
         </div>
         <div class="question-box" id="question3">
-            <p>How do you feel about your Time management/Organization right now?</p>
+            <p>How do you feel about your Money right now?</p>
             <div id="buttons3"></div>
         </div>
         <div class="question-box" id="question4">
-            <p>How would you like to feel about your Time management/Organization in the future?</p>
+            <p>How would you like to feel about your Money in the future?</p>
             <div id="buttons4"></div>
         </div>
         <div class="question-box" id="question5">
-            <p>How do you feel about your Productivity right now?</p>
+            <p>How do you feel about your Health right now?</p>
             <div id="buttons5"></div>
         </div>
         <div class="question-box" id="question6">
-            <p>How would you like to feel about your Productivity in the future?</p>
+            <p>How would you like to feel about your Health in the future?</p>
             <div id="buttons6"></div>
         </div>
         <div class="question-box" id="question7">
-            <p>How do you feel about your Leadership right now?</p>
+            <p>How do you feel about your Relationships right now?</p>
             <div id="buttons7"></div>
         </div>
         <div class="question-box" id="question8">
-            <p>How would you like to feel about your Leadership in the future?</p>
+            <p>How would you like to feel about your Relationships in the future?</p>
             <div id="buttons8"></div>
         </div>
         <div class="question-box" id="question9">
-            <p>How do you feel about your Work aligned with purpose right now?</p>
+            <p>How do you feel about your Personal Growth right now?</p>
             <div id="buttons9"></div>
         </div>
         <div class="question-box" id="question10">
-            <p>How would you like to feel about your Work aligned with purpose in the future?</p>
+            <p>How would you like to feel about your Personal Growth in the future?</p>
             <!-- Growth/Opportunity -->
             <div id="buttons10"></div>
         </div>
         <div class="question-box" id="question11">
-            <p>How do you feel about your Work/Life balance right now?</p>
+            <p>How do you feel about your Fun and Recreation right now?</p>
             <div id="buttons11"></div>
         </div>
         <div class="question-box" id="question12">
-            <p>How would you like to feel about your Work/Life balance in the future?</p>
+            <p>How would you like to feel about your Fun and Recreation in the future?</p>
             <div id="buttons12"></div>
         </div>
         <div class="question-box" id="question13">
-            <p>How do you feel about your Challenge right now?</p>
+            <p>How do you feel about your Physical Environment right now?</p>
             <div id="buttons13"></div>
         </div>
         <div class="question-box" id="question14">
-            <p>How would you like to feel about your Challenge in the future?</p>
+            <p>How would you like to feel about your Physical Environment in the future?</p>
             <div id="buttons14"></div>
         </div>
         <div class="question-box" id="question15">
-            <p>How do you feel about your ????????????????? right now?</p>
+            <p>How do you feel about your Spirituality right now?</p>
             <div id="buttons15"></div>
         </div>
         <div class="question-box" id="question16">
-            <p>How would you like to feel about your ???????????? in the future?</p>
+            <p>How would you like to feel about your Spirituality in the future?</p>
             <div id="buttons16"></div>
         </div>
     </div>
@@ -301,9 +301,9 @@
             var myChart = new Chart(ctx, {
                 type: 'polarArea',
                 data: {
-                    labels: ['Growth/Opportunity', 'Time management/Organization',
-                        'Productivity', 'Leadership', 'Work aligned w purpose',
-                        'Work/Life balance', 'Challenge', '???'],
+                    labels: ['Health', 'Relationships',
+                        'Fun and Recreation', 'Spirituality', 'Career',
+                        'Money', 'Physical Environment', 'Personal Growth'],
                     datasets: [{
                         label: 'Odd Question Numbers',
                         data: oddAnswers,
@@ -370,9 +370,9 @@
 
             var tbody = document.getElementById('resultsTable').querySelector('tbody');
             tbody.innerHTML = ''; // Clear existing rows
-            var rowNames = ['Growth/Opportunity', 'Time management/Organization',
-                'Productivity', 'Leadership', 'Work aligned w purpose',
-                'Work/Life balance', 'Challenge', '???']
+            var rowNames = ['Health', 'Relationships',
+                        'Fun and Recreation', 'Spirituality', 'Career',
+                        'Money', 'Physical Environment', 'Personal Growth'],
             for (let i = 0; i < oddAnswers.length; i++) {
                 let row = tbody.insertRow();
                 let questionCell = row.insertCell(0);
