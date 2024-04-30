@@ -15,12 +15,14 @@
             display: flex;
             flex-direction: column;
             /* Змініть на колонку для правильного розташування */
-            align-items: center;
+           
             /* Центрування вмісту */
             width: 100%;
             /* Забезпечте, що body займає всю ширину */
         }
-
+        .center-items {
+    align-items: center;
+}
         header {
             width: 100%;
             /* Повна ширина хедера */
@@ -252,7 +254,6 @@
 
     <script>
         document.getElementById('question1').style.display = 'block'; // Show the first question initially
-        document.getElementById('question1').style.display = 'block'; // Show the first question initially
         var answers = []; // Initialize an empty array to store answers
 
         function createButtons(questionId) {
@@ -283,6 +284,7 @@
         function submitSurvey() {
             // console.log('Survey completed! Answers:', answers); // Log the final array of answers
             // alert('Survey completed! Thank you for your responses.');
+            document.body.classList.add('center-items');
             var ctx = document.getElementById('myChart').getContext('2d');
             document.getElementById('myChart').style.display = 'block';
 
