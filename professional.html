@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button-based Survey</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            /* Змініть на колонку для правильного розташування */
+            align-items: center;
+            /* Центрування вмісту */
+            width: 100%;
+            /* Забезпечте, що body займає всю ширину */
+        }
+
+        header {
+            width: 100%;
+            /* Повна ширина хедера */
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Синій колір фону для хедера */
+            color: white;
+            /* Білий текст */
+            text-align: center;
+            font-size: 24px;
+            /* Розмір шрифта для заголовка */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Додавання тіні для ефекту "відділення" */
+            margin-bottom: 20px;
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: row;
+            /* Горизонтальний напрямок для великих екранів */
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            /* Обмеження максимальної ширини */
+        }
+
+        @media (max-width: 1000px) {
+            .content-area {
+                flex-direction: column;
+                /* Елементи у колонку для мобільних */
+            }
+
+            #myChart,
+            #resultsTable {
+                max-width: 100%;
+                /* Впевнитись, що графік і таблиця вміщаються в ширину екрану */
+                max-height: none;
+                /* Скасування обмежень по висоті, якщо такі були */
+                display: block;
+                /* Забезпечення блочного відображення */
+            }
+
+            #resultsTable {
+                width: 100%;
+                /* Таблиця повинна займати всю доступну ширину */
+            }
+        }
+
+
+
+
+        .question-box {
+            display: none;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            width: 100%;
+            /* Ширина блоку розтягується на весь екран */
+            border: none;
+            /* Відсутність видимого бордера */
+            box-shadow: none;
+            /* Відсутність тіні */
+            text-align: left;
+            /* Вирівнювання тексту по лівому краю */
+            font-size: 18px;
+            /* Збільшення розміру тексту */
+        }
+
+
+        .number-btn {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .number-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #myChart {
+            max-height: 500px;
+            max-width: 800px;
+            flex-grow: 1;
+        }
+
+
+        #resultsTable {
+            display: none;
+            flex-grow: 1;
+            margin-left: 20px;
+            /* Space between chart and table */
+            max-width: 500px;
+            background-color: #fff;
+            /* Background color */
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Shadow for 3D effect */
+        }
+
+        #resultsTable,
+        th,
+        td {
+            border: 1px solid #ccc;
+            /* Light grey border for a softer look */
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007bff;
+            /* Blue background for headers */
+            color: white;
+            /* White text color */
+            font-size: 16px;
+            /* Larger font size for headers */
+        }
+
+        td {
+            text-align: center;
+            /* Center align text */
+            font-size: 14px;
+            /* Standard font size for data */
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+            /* Zebra striping for rows */
+        }
+    </style>
+</head>
+
+<body>
+    <header>Professional Wheel of Life</header>
+    <div id="surveyForm">
+        <!-- Repeat this structure for each question -->
+        <div class="question-box" id="question1">
+            <p>How do you feel about your Growth/Opportunity right now?</p>
+            <div id="buttons1"></div>
+        </div>
+        <div class="question-box" id="question2">
+            <p>How would you like to feel about your Growth/Opportunity in the future?</p>
+            <!-- Growth/Opportunity -->
+            <div id="buttons2"></div>
+        </div>
+        <div class="question-box" id="question3">
+            <p>How do you feel about your Time management/Organization right now?</p>
+            <div id="buttons3"></div>
+        </div>
+        <div class="question-box" id="question4">
+            <p>How would you like to feel about your Time management/Organization in the future?</p>
+            <div id="buttons4"></div>
+        </div>
+        <div class="question-box" id="question5">
+            <p>How do you feel about your Productivity right now?</p>
+            <div id="buttons5"></div>
+        </div>
+        <div class="question-box" id="question6">
+            <p>How would you like to feel about your Productivity in the future?</p>
+            <div id="buttons6"></div>
+        </div>
+        <div class="question-box" id="question7">
+            <p>How do you feel about your Leadership right now?</p>
+            <div id="buttons7"></div>
+        </div>
+        <div class="question-box" id="question8">
+            <p>How would you like to feel about your Leadership in the future?</p>
+            <div id="buttons8"></div>
+        </div>
+        <div class="question-box" id="question9">
+            <p>How do you feel about your Work aligned with purpose right now?</p>
+            <div id="buttons9"></div>
+        </div>
+        <div class="question-box" id="question10">
+            <p>How would you like to feel about your GWork aligned with purpose in the future?</p>
+            <!-- Growth/Opportunity -->
+            <div id="buttons10"></div>
+        </div>
+        <div class="question-box" id="question11">
+            <p>How do you feel about your Work/Life balance right now?</p>
+            <div id="buttons11"></div>
+        </div>
+        <div class="question-box" id="question12">
+            <p>How would you like to feel about your Work/Life balance in the future?</p>
+            <div id="buttons12"></div>
+        </div>
+        <div class="question-box" id="question13">
+            <p>How do you feel about your Challenge right now?</p>
+            <div id="buttons13"></div>
+        </div>
+        <div class="question-box" id="question14">
+            <p>How would you like to feel about your Challenge in the future?</p>
+            <div id="buttons14"></div>
+        </div>
+        <div class="question-box" id="question15">
+            <p>How do you feel about your ????????????????? right now?</p>
+            <div id="buttons15"></div>
+        </div>
+        <div class="question-box" id="question16">
+            <p>How would you like to feel about your ???????????? in the future?</p>
+            <div id="buttons16"></div>
+        </div>
+    </div>
+
+
+    <div class="content-area">
+        <canvas id="myChart"></canvas>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Domain</th>
+                    <th>Now</th>
+                    <th>Future</th>
+                    <th>Gap</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+
+        <!-- <button id="restartButton" style="margin-top: 20px;">Restart</button> -->
+        <!-- Кнопка для перезапуску опитування -->
+    </div>
+
+    <script>
+        document.getElementById('question1').style.display = 'block'; // Show the first question initially
+        document.getElementById('question1').style.display = 'block'; // Show the first question initially
+        var answers = []; // Initialize an empty array to store answers
+
+        function createButtons(questionId) {
+            const container = document.getElementById('buttons' + questionId);
+            for (let i = 1; i <= 10; i++) {
+                const button = document.createElement('button');
+                button.className = 'number-btn';
+                button.innerText = i;
+                button.onclick = function () { selectAnswer(i, questionId); };
+                container.appendChild(button);
+            }
+        }
+
+        function selectAnswer(answer, currentQuestion) {
+            answers[currentQuestion - 1] = answer; // Store answer in the array at the index corresponding to the question number minus 1
+            console.log(`Answer for question ${currentQuestion}: ${answer}`);
+            var currentBox = document.getElementById('question' + currentQuestion);
+            currentBox.style.display = 'none';
+            var nextQuestion = currentQuestion + 1;
+            var nextBox = document.getElementById('question' + nextQuestion);
+            if (nextBox) {
+                nextBox.style.display = 'block';
+            } else {
+                submitSurvey(); // Call the function to handle the survey completion
+            }
+        }
+
+        function submitSurvey() {
+            // console.log('Survey completed! Answers:', answers); // Log the final array of answers
+            // alert('Survey completed! Thank you for your responses.');
+            var ctx = document.getElementById('myChart').getContext('2d');
+            document.getElementById('myChart').style.display = 'block';
+
+            // Grouping answers in pairs
+            var evenAnswers = [];
+            var oddAnswers = [];
+            for (let i = 0; i < answers.length; i++) {
+                if (i % 2 === 0) { // Even indexes (0, 2, 4, 6) for odd question numbers (1, 3, 5, 7)
+                    oddAnswers.push(answers[i]);
+                } else { // Odd indexes (1, 3, 5, 7) for even question numbers (2, 4, 6, 8)
+                    evenAnswers.push(answers[i]);
+                }
+            }
+
+            // Generate the chart
+            var myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Growth/Opportunity', 'Time management/Organization',
+                        'Productivity', 'Leadership', 'Work aligned w purpose',
+                        'Work/Life balance', 'Challenge', '???'],
+                    datasets: [{
+                        label: 'Odd Question Numbers',
+                        data: oddAnswers,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }, {
+                        label: 'Even Question Numbers',
+                        data: evenAnswers,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 159, 64, 0.5)',
+                            'rgba(199, 199, 199, 0.5)',
+                            'rgba(83, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(199, 199, 199, 1)',
+                            'rgba(83, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+
+
+                            display: false,
+
+                        }
+                    },
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                display: true,
+                                centerPointLabels: true,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    scale: {
+                        display: false // Вимкнення позначок осі
+                    }
+
+                },
+
+            });
+
+
+            var tbody = document.getElementById('resultsTable').querySelector('tbody');
+            tbody.innerHTML = ''; // Clear existing rows
+            var rowNames = ['Growth/Opportunity', 'Time management/Organization',
+                'Productivity', 'Leadership', 'Work aligned w purpose',
+                'Work/Life balance', 'Challenge', '???']
+            for (let i = 0; i < oddAnswers.length; i++) {
+                let row = tbody.insertRow();
+                let questionCell = row.insertCell(0);
+                let cell1 = row.insertCell(1);
+                let cell2 = row.insertCell(2);
+                let cell3 = row.insertCell(3);
+
+                questionCell.textContent = rowNames[i]; // Add question descriptions
+                cell1.textContent = oddAnswers[i];
+                cell2.textContent = evenAnswers[i];
+                cell3.textContent = evenAnswers[i] - oddAnswers[i];
+            }
+            document.getElementById('resultsTable').style.display = 'table';
+
+        }
+
+
+        // Generate buttons for each question
+        createButtons(1);
+        createButtons(2);
+        createButtons(3);
+        createButtons(4);
+        createButtons(5);
+        createButtons(6);
+        createButtons(7);
+        createButtons(8);
+        createButtons(9);
+        createButtons(10);
+        createButtons(11);
+        createButtons(12);
+        createButtons(13);
+        createButtons(14);
+        createButtons(15);
+        createButtons(16);
+        // Add calls to createButtons for other questions as needed
+
+    </script>
+</body>
+
+</html>
