@@ -15,14 +15,16 @@
             display: flex;
             flex-direction: column;
             /* Змініть на колонку для правильного розташування */
-           
+
             /* Центрування вмісту */
             width: 100%;
             /* Забезпечте, що body займає всю ширину */
         }
+
         .center-items {
-    align-items: center;
-}
+            align-items: center;
+        }
+
         header {
             width: 100%;
             /* Повна ширина хедера */
@@ -156,6 +158,27 @@
             background-color: #f2f2f2;
             /* Zebra striping for rows */
         }
+
+        footer {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Синій колір фону */
+            color: white;
+            /* Білий колір тексту */
+            text-align: center;
+            /* Вирівнювання тексту по центру */
+            font-size: 16px;
+            /* Розмір шрифта */
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            /* Тінь для візуального ефекту "відділення" */
+            position: fixed;
+            /* Фіксує футер у нижній частині вікна перегляду */
+            bottom: 0;
+            /* Розміщення в самому низу сторінки */
+            left: 0;
+            /* Забезпечує розтягнення на всю ширину сторінки */
+        }
     </style>
 </head>
 
@@ -250,7 +273,11 @@
 
         <!-- <button id="restartButton" style="margin-top: 20px;">Restart</button> -->
         <!-- Кнопка для перезапуску опитування -->
+       
     </div>
+    <footer>
+        © 2024 Stephanie Dua
+    </footer>
 
     <script>
         document.getElementById('question1').style.display = 'block'; // Show the first question initially
@@ -362,11 +389,11 @@
                             min: 0,
                             max: 10,
                             ticks: {
-                                   display: false // Вимкнення позначок осі
-                           }
+                                display: false // Вимкнення позначок осі
+                            }
                         }
                     },
-                 },
+                },
             });
 
 

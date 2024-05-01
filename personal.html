@@ -15,15 +15,15 @@
             display: flex;
             flex-direction: column;
             /* Змініть на колонку для правильного розташування */
-            /* align-items: center; */ 
+            /* align-items: center; */
             /* Центрування вмісту */
             width: 100%;
             /* Забезпечте, що body займає всю ширину */
         }
 
         .center-items {
-    align-items: center;
-}
+            align-items: center;
+        }
 
         header {
             width: 100%;
@@ -158,6 +158,27 @@
             background-color: #f2f2f2;
             /* Zebra striping for rows */
         }
+
+        footer {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Синій колір фону */
+            color: white;
+            /* Білий колір тексту */
+            text-align: center;
+            /* Вирівнювання тексту по центру */
+            font-size: 16px;
+            /* Розмір шрифта */
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            /* Тінь для візуального ефекту "відділення" */
+            position: fixed;
+            /* Фіксує футер у нижній частині вікна перегляду */
+            bottom: 0;
+            /* Розміщення в самому низу сторінки */
+            left: 0;
+            /* Забезпечує розтягнення на всю ширину сторінки */
+        }
     </style>
 </head>
 
@@ -252,6 +273,9 @@
 
         <!-- <button id="restartButton" style="margin-top: 20px;">Restart</button> -->
         <!-- Кнопка для перезапуску опитування -->
+        <footer>
+            © 2024 Stephanie Dua
+        </footer>
     </div>
 
     <script>
@@ -308,7 +332,7 @@
                     labels: ['Career', 'Money',
                         'Health', 'Relationships', 'Personal Growth',
                         'Fun and Recreation', 'Physical Environment', 'Spirituality'],
-                        datasets: [{
+                    datasets: [{
                         label: 'Now',
                         data: oddAnswers,
                         backgroundColor: [
@@ -364,19 +388,19 @@
                             min: 0,
                             max: 10,
                             ticks: {
-                                   display: false // Вимкнення позначок осі
-                           }
+                                display: false // Вимкнення позначок осі
+                            }
                         }
                     },
-                 },
+                },
             });
 
 
             var tbody = document.getElementById('resultsTable').querySelector('tbody');
             tbody.innerHTML = ''; // Clear existing rows
             var rowNames = ['Career', 'Money',
-                        'Health', 'Relationships', 'Personal Growth',
-                        'Fun and Recreation', 'Physical Environment', 'Spirituality']
+                'Health', 'Relationships', 'Personal Growth',
+                'Fun and Recreation', 'Physical Environment', 'Spirituality']
             for (let i = 0; i < oddAnswers.length; i++) {
                 let row = tbody.insertRow();
                 let questionCell = row.insertCell(0);
